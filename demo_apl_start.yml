@@ -1,0 +1,16 @@
+- name: Start demo apl
+  hosts: all
+  tasks:
+
+    - name: start
+      ansible.builtin.shell:
+        cmd: podman start sample-apl
+        
+    - name: check
+      ansible.builtin.shell:
+        cmd: sudo systemctl status httpd
+      register: result
+
+    - name: debug
+      ansible.builtin.debug:
+        var: result
