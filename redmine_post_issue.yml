@@ -3,7 +3,7 @@
   tasks:
     - name: Post Issue
       ansible.builtin.uri:
-        url: http://{{ ip_address }}:3000/issues/issues.json
+        url: http://{{ ip_address }}:3000/issues.json
         method: POST
         body_format: json
         headers:
