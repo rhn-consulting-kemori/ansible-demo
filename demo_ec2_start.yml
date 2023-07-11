@@ -1,6 +1,7 @@
 - name: Start demo EC2
   hosts: localhost
   tasks:
+    
     - name: Start the sandbox instances
       amazon.aws.ec2:
         instance_ids: '{{ ec2.instance_ids }}'
