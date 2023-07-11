@@ -14,7 +14,7 @@
         body: |-
           {
             "issue": {
-              "status_id": "5"
+              "status_id": "{{ status_id }}"
             }
           }
       register: result
