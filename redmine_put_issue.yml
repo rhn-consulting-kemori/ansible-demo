@@ -1,4 +1,4 @@
-- name: redmine post issue
+- name: redmine put issue
   hosts: demo_server
   tasks:
     - name: Update Issue
@@ -14,7 +14,7 @@
         body: |-
           {
             "issue": {
-              "status_id": "{{ status_id }}"
+              "status_id": "5"
             }
           }
       register: result
