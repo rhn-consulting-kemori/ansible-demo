@@ -1,0 +1,24 @@
+- name: redmine post issue
+  hosts: demo_server
+  tasks:
+    - name: Update Issue
+      ansible.builtin.uri:
+        url: http://{{ ip_address }}:3000/issues/{{ ticket_no }}.json
+        method: PUT
+        body_format: json
+        status_code: [200, 201, 202]
+        return_content: true
+        headers:
+          Content-Type: application/json
+          X-Redmine-API-Key: "{{ api_key }}"
+        body: |-
+          {
+            "issue": {
+              "status_id": "5"
+            }
+          }
+      register: result
+
+    - name: debug
+      ansible.builtin.debug:
+        var: result
