@@ -1,0 +1,16 @@
+- name: redmine get issue
+  hosts: demo_server
+  tasks:
+    - name: Get Issue
+      ansible.builtin.uri:
+        url: http://{{ ip_address }}:3000/issues/{{ ticket_no }}.json
+        method: GET
+        return_content: true
+        headers:
+          Content-Type: application/json
+          X-Redmine-API-Key: {{ api_key }} 
+      register: result
+
+    - name: debug
+      ansible.builtin.debug:
+        var: result
