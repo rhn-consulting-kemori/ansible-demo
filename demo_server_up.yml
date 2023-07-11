@@ -1,0 +1,15 @@
+- name: Start demo apl
+  hosts: demo_server
+  tasks:
+
+    - name: sample-apl start
+      ansible.builtin.shell:
+        cmd: podman start sample-apl
+
+    - name: demo-trouble start
+      ansible.builtin.shell:
+        cmd: podman start demo-trouble
+
+    - name: redmine start
+      ansible.builtin.shell:
+        cmd: podman pod start redmine-pod
