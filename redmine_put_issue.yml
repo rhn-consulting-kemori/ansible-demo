@@ -6,7 +6,7 @@
         url: http://{{ ip_address }}:3000/issues/{{ ticket_no }}.json
         method: PUT
         body_format: json
-        status_code: [200, 201, 202]
+        status_code: 204
         return_content: true
         headers:
           Content-Type: application/json
