@@ -8,7 +8,7 @@
         return_content: true
         headers:
           Content-Type: application/json
-          X-Redmine-API-Key: {{ api_key }} 
+          X-Redmine-API-Key: "{{ api_key }}" 
       register: result
 
     - name: debug
