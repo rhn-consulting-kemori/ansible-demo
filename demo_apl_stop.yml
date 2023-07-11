@@ -1,0 +1,7 @@
+- name: Start demo apl
+  hosts: demo_server
+  tasks:
+
+    - name: start
+      ansible.builtin.shell:
+        cmd: podman stop sample-apl
