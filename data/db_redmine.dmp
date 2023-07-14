@@ -1814,7 +1814,7 @@ CREATE TABLE `tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `tokens_value` (`value`),
   KEY `index_tokens_on_user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1828,8 +1828,8 @@ INSERT INTO `tokens` VALUES
 (5,5,'session','d5a14379dfc832b8ec6f4b7771ae6ac4c2a4ff67','2023-07-08 07:23:54','2023-07-08 07:42:05'),
 (6,5,'feeds','28c9017d1c40f80bb447ac8b90dfcce6b87ae2bc','2023-07-08 07:23:55','2023-07-08 07:23:55'),
 (7,5,'api','493303a2091d98f93f263af0077b697e432b09f7','2023-07-08 07:24:06','2023-07-08 07:24:06'),
-(12,7,'feeds','f636395192d49e062a850689e0449f1d00495bcf','2023-07-14 06:46:36','2023-07-14 06:46:36'),
-(15,5,'session','e4b013ce19989cad60bc5ba81665691b7a6fea8d','2023-07-14 06:55:36','2023-07-14 06:56:57');
+(9,5,'session','f5acf3e7a05f658e89dccd6e0910b83d0cb5aa91','2023-07-14 06:36:14','2023-07-14 06:36:14'),
+(11,1,'session','2d8440a7d658492fa08a1890abdf8f76f459beef','2023-07-14 07:02:49','2023-07-14 07:03:52');
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1894,7 +1894,7 @@ INSERT INTO `user_preferences` VALUES
 (1,1,'---\n:no_self_notified: \'1\'\n:auto_watch_on:\n- \'\'\n- issue_contributed_to\n:my_page_layout:\n  left:\n  - issuesassignedtome\n  right:\n  - issuesreportedbyme\n:my_page_settings: {}\n:comments_sorting: asc\n:warn_on_leaving_unsaved: \'1\'\n:textarea_font: \'\'\n:recently_used_projects: 3\n:history_default_tab: notes\n:toolbar_language_options: c,cpp,csharp,css,diff,go,groovy,html,java,javascript,objc,perl,php,python,r,ruby,sass,scala,shell,sql,swift,xml,yaml\n:default_issue_query: \'\'\n:default_project_query: \'\'\n:recently_used_project_ids: \'1\'\n',1,''),
 (2,5,'---\n:no_self_notified: \'1\'\n:auto_watch_on:\n- \'\'\n- issue_contributed_to\n:my_page_layout:\n  left:\n  - issuesassignedtome\n  right:\n  - issuesreportedbyme\n:my_page_settings: {}\n:notify_about_high_priority_issues: \'0\'\n:comments_sorting: asc\n:warn_on_leaving_unsaved: \'1\'\n:textarea_font: \'\'\n:recently_used_projects: 3\n:history_default_tab: notes\n:toolbar_language_options: c,cpp,csharp,css,diff,go,groovy,html,java,javascript,objc,perl,php,python,r,ruby,sass,scala,shell,sql,swift,xml,yaml\n:default_issue_query: \'\'\n:default_project_query: \'\'\n:recently_used_project_ids: \'1\'\n',1,''),
 (3,6,'---\n:no_self_notified: \'1\'\n:auto_watch_on:\n- \'\'\n- issue_contributed_to\n:my_page_layout:\n  left:\n  - issuesassignedtome\n  right:\n  - issuesreportedbyme\n:my_page_settings: {}\n:notify_about_high_priority_issues: \'0\'\n:comments_sorting: asc\n:warn_on_leaving_unsaved: \'1\'\n:textarea_font: \'\'\n:recently_used_projects: 3\n:history_default_tab: notes\n:toolbar_language_options: c,cpp,csharp,css,diff,go,groovy,html,java,javascript,objc,perl,php,python,r,ruby,sass,scala,shell,sql,swift,xml,yaml\n:default_issue_query: \'\'\n:default_project_query: \'\'\n',1,''),
-(4,7,'---\n:no_self_notified: \'1\'\n:auto_watch_on:\n- \'\'\n- issue_contributed_to\n:my_page_layout:\n  left:\n  - issuesassignedtome\n  right:\n  - issuesreportedbyme\n:my_page_settings: {}\n:notify_about_high_priority_issues: \'0\'\n:comments_sorting: asc\n:warn_on_leaving_unsaved: \'1\'\n:textarea_font: \'\'\n:recently_used_projects: 3\n:history_default_tab: notes\n:toolbar_language_options: c,cpp,csharp,css,diff,go,groovy,html,java,javascript,objc,perl,php,python,r,ruby,sass,scala,shell,sql,swift,xml,yaml\n:default_issue_query: \'\'\n:default_project_query: \'\'\n:recently_used_project_ids: \'1\'\n',1,''),
+(4,7,'---\n:no_self_notified: \'1\'\n:auto_watch_on:\n- \'\'\n- issue_contributed_to\n:my_page_layout:\n  left:\n  - issuesassignedtome\n  right:\n  - issuesreportedbyme\n:my_page_settings: {}\n:notify_about_high_priority_issues: \'0\'\n:comments_sorting: asc\n:warn_on_leaving_unsaved: \'1\'\n:textarea_font: \'\'\n:recently_used_projects: 3\n:history_default_tab: notes\n:toolbar_language_options: c,cpp,csharp,css,diff,go,groovy,html,java,javascript,objc,perl,php,python,r,ruby,sass,scala,shell,sql,swift,xml,yaml\n:default_issue_query: \'\'\n:default_project_query: \'\'\n',1,''),
 (5,8,'---\n:no_self_notified: \'1\'\n:auto_watch_on:\n- \'\'\n- issue_contributed_to\n:my_page_layout:\n  left:\n  - issuesassignedtome\n  right:\n  - issuesreportedbyme\n:my_page_settings: {}\n:notify_about_high_priority_issues: \'0\'\n:comments_sorting: asc\n:warn_on_leaving_unsaved: \'1\'\n:textarea_font: \'\'\n:recently_used_projects: 3\n:history_default_tab: notes\n:toolbar_language_options: c,cpp,csharp,css,diff,go,groovy,html,java,javascript,objc,perl,php,python,r,ruby,sass,scala,shell,sql,swift,xml,yaml\n:default_issue_query: \'\'\n:default_project_query: \'\'\n',1,''),
 (6,9,'---\n:no_self_notified: \'1\'\n:auto_watch_on:\n- \'\'\n- issue_contributed_to\n:my_page_layout:\n  left:\n  - issuesassignedtome\n  right:\n  - issuesreportedbyme\n:my_page_settings: {}\n:notify_about_high_priority_issues: \'0\'\n:comments_sorting: asc\n:warn_on_leaving_unsaved: \'1\'\n:textarea_font: \'\'\n:recently_used_projects: 3\n:history_default_tab: notes\n:toolbar_language_options: c,cpp,csharp,css,diff,go,groovy,html,java,javascript,objc,perl,php,python,r,ruby,sass,scala,shell,sql,swift,xml,yaml\n:default_issue_query: \'\'\n:default_project_query: \'\'\n',1,''),
 (7,10,'---\n:no_self_notified: \'1\'\n:auto_watch_on:\n- \'\'\n- issue_contributed_to\n:my_page_layout:\n  left:\n  - issuesassignedtome\n  right:\n  - issuesreportedbyme\n:my_page_settings: {}\n:notify_about_high_priority_issues: \'0\'\n:comments_sorting: asc\n:warn_on_leaving_unsaved: \'1\'\n:textarea_font: \'\'\n:recently_used_projects: 3\n:history_default_tab: notes\n:toolbar_language_options: c,cpp,csharp,css,diff,go,groovy,html,java,javascript,objc,perl,php,python,r,ruby,sass,scala,shell,sql,swift,xml,yaml\n:default_issue_query: \'\'\n:default_project_query: \'\'\n',1,''),
@@ -1960,13 +1960,13 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES
-(1,'admin','cb52e9a95e8171b2a4e717f58a9e17de5cf260ce','Redmine','Admin',1,1,'2023-07-14 06:47:24','ja',NULL,'2023-07-08 06:18:43','2023-07-08 06:32:47','User','all','a7484f9cdcf7e27fafa516973e8dc796',0,'2023-07-08 06:30:35',NULL,NULL,NULL,0),
+(1,'admin','cb52e9a95e8171b2a4e717f58a9e17de5cf260ce','Redmine','Admin',1,1,'2023-07-14 07:02:49','ja',NULL,'2023-07-08 06:18:43','2023-07-08 06:32:47','User','all','a7484f9cdcf7e27fafa516973e8dc796',0,'2023-07-08 06:30:35',NULL,NULL,NULL,0),
 (2,'','','','Anonymous users',0,1,NULL,'',NULL,'2023-07-08 06:18:49','2023-07-08 06:18:49','GroupAnonymous','',NULL,0,NULL,NULL,NULL,NULL,0),
 (3,'','','','Non member users',0,1,NULL,'',NULL,'2023-07-08 06:18:49','2023-07-08 06:18:49','GroupNonMember','',NULL,0,NULL,NULL,NULL,NULL,0),
 (4,'','','','Anonymous',0,0,NULL,'',NULL,'2023-07-08 06:25:46','2023-07-08 06:25:46','AnonymousUser','only_my_events',NULL,0,NULL,NULL,NULL,NULL,0),
-(5,'automates01','eb5be0117e4274516f6b03f1ba7d00f9e53d6e8d','イチ','自動起票',0,1,'2023-07-14 06:55:36','ja',NULL,'2023-07-08 07:01:16','2023-07-08 07:11:14','User','only_my_events','aaaca2732ed2085d2c1d5af2fa2a214f',0,'2023-07-08 07:11:14',NULL,NULL,NULL,0),
+(5,'automates01','eb5be0117e4274516f6b03f1ba7d00f9e53d6e8d','イチ','自動起票',0,1,'2023-07-14 07:02:17','ja',NULL,'2023-07-08 07:01:16','2023-07-08 07:11:14','User','only_my_events','aaaca2732ed2085d2c1d5af2fa2a214f',0,'2023-07-08 07:11:14',NULL,NULL,NULL,0),
 (6,'automates02','ec6edafa25af486f7c3cee1e40dc0d612d173990','ニ','自動起票',0,1,NULL,'ja',NULL,'2023-07-08 07:01:16','2023-07-08 07:12:58','User','only_my_events','5f172e881f6dcb10e1026bf4941fb7a8',0,'2023-07-08 07:12:58',NULL,NULL,NULL,0),
-(7,'user01','5eaed54bec6e1b23c6bc8e75da2b53c0bc00e787','哲也','内藤',0,1,'2023-07-14 06:46:35','ja',NULL,'2023-07-08 07:01:16','2023-07-08 07:13:06','User','only_my_events','2c6ed4d04d804d9d35216b4f97ad6d21',0,'2023-07-08 07:13:06',NULL,NULL,NULL,0),
+(7,'user01','5eaed54bec6e1b23c6bc8e75da2b53c0bc00e787','哲也','内藤',0,1,NULL,'ja',NULL,'2023-07-08 07:01:16','2023-07-08 07:13:06','User','only_my_events','2c6ed4d04d804d9d35216b4f97ad6d21',0,'2023-07-08 07:13:06',NULL,NULL,NULL,0),
 (8,'user02','ce9dcbe81b464a8b4ce104c5b9ad4e86c297d0f3','弘至','棚橋',0,1,NULL,'ja',NULL,'2023-07-08 07:01:16','2023-07-08 07:13:14','User','only_my_events','c4706a925cba8d84a64a1877de1b5808',0,'2023-07-08 07:13:14',NULL,NULL,NULL,0),
 (9,'user03','f3cfc8aec7e2d262b2ae85934bea4cfd35a3057f','真輔','中邑',0,1,NULL,'ja',NULL,'2023-07-08 07:01:16','2023-07-08 07:13:42','User','only_my_events','5c1cec149cc3de3862904952bd22b341',0,'2023-07-08 07:13:42',NULL,NULL,NULL,0),
 (10,'user04','f520f650992c563cd847235731f981c76dabe684','カズチカ','オカダ',0,1,NULL,'ja',NULL,'2023-07-08 07:01:16','2023-07-08 07:13:56','User','only_my_events','01094804ee0b5247b30f7d72a4026e0c',0,'2023-07-08 07:13:56',NULL,NULL,NULL,0),
@@ -2496,4 +2496,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-14  6:58:23
+-- Dump completed on 2023-07-14  7:07:17
