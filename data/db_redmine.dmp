@@ -1814,7 +1814,7 @@ CREATE TABLE `tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `tokens_value` (`value`),
   KEY `index_tokens_on_user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1827,7 +1827,8 @@ INSERT INTO `tokens` VALUES
 (3,1,'feeds','a27bc683908d98ff0fadeb8f48a2d2ac5601940d','2023-07-08 06:46:20','2023-07-08 06:46:20'),
 (5,5,'session','d5a14379dfc832b8ec6f4b7771ae6ac4c2a4ff67','2023-07-08 07:23:54','2023-07-08 07:42:05'),
 (6,5,'feeds','28c9017d1c40f80bb447ac8b90dfcce6b87ae2bc','2023-07-08 07:23:55','2023-07-08 07:23:55'),
-(7,5,'api','493303a2091d98f93f263af0077b697e432b09f7','2023-07-08 07:24:06','2023-07-08 07:24:06');
+(7,5,'api','493303a2091d98f93f263af0077b697e432b09f7','2023-07-08 07:24:06','2023-07-08 07:24:06'),
+(9,5,'session','f5acf3e7a05f658e89dccd6e0910b83d0cb5aa91','2023-07-14 06:36:14','2023-07-14 06:36:14');
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1958,11 +1959,11 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES
-(1,'admin','cb52e9a95e8171b2a4e717f58a9e17de5cf260ce','Redmine','Admin',1,1,'2023-07-08 07:09:38','ja',NULL,'2023-07-08 06:18:43','2023-07-08 06:32:47','User','all','a7484f9cdcf7e27fafa516973e8dc796',0,'2023-07-08 06:30:35',NULL,NULL,NULL,0),
+(1,'admin','cb52e9a95e8171b2a4e717f58a9e17de5cf260ce','Redmine','Admin',1,1,'2023-07-14 06:30:06','ja',NULL,'2023-07-08 06:18:43','2023-07-08 06:32:47','User','all','a7484f9cdcf7e27fafa516973e8dc796',0,'2023-07-08 06:30:35',NULL,NULL,NULL,0),
 (2,'','','','Anonymous users',0,1,NULL,'',NULL,'2023-07-08 06:18:49','2023-07-08 06:18:49','GroupAnonymous','',NULL,0,NULL,NULL,NULL,NULL,0),
 (3,'','','','Non member users',0,1,NULL,'',NULL,'2023-07-08 06:18:49','2023-07-08 06:18:49','GroupNonMember','',NULL,0,NULL,NULL,NULL,NULL,0),
 (4,'','','','Anonymous',0,0,NULL,'',NULL,'2023-07-08 06:25:46','2023-07-08 06:25:46','AnonymousUser','only_my_events',NULL,0,NULL,NULL,NULL,NULL,0),
-(5,'automates01','eb5be0117e4274516f6b03f1ba7d00f9e53d6e8d','イチ','自動起票',0,1,'2023-07-08 07:23:54','ja',NULL,'2023-07-08 07:01:16','2023-07-08 07:11:14','User','only_my_events','aaaca2732ed2085d2c1d5af2fa2a214f',0,'2023-07-08 07:11:14',NULL,NULL,NULL,0),
+(5,'automates01','eb5be0117e4274516f6b03f1ba7d00f9e53d6e8d','イチ','自動起票',0,1,'2023-07-14 06:36:14','ja',NULL,'2023-07-08 07:01:16','2023-07-08 07:11:14','User','only_my_events','aaaca2732ed2085d2c1d5af2fa2a214f',0,'2023-07-08 07:11:14',NULL,NULL,NULL,0),
 (6,'automates02','ec6edafa25af486f7c3cee1e40dc0d612d173990','ニ','自動起票',0,1,NULL,'ja',NULL,'2023-07-08 07:01:16','2023-07-08 07:12:58','User','only_my_events','5f172e881f6dcb10e1026bf4941fb7a8',0,'2023-07-08 07:12:58',NULL,NULL,NULL,0),
 (7,'user01','5eaed54bec6e1b23c6bc8e75da2b53c0bc00e787','哲也','内藤',0,1,NULL,'ja',NULL,'2023-07-08 07:01:16','2023-07-08 07:13:06','User','only_my_events','2c6ed4d04d804d9d35216b4f97ad6d21',0,'2023-07-08 07:13:06',NULL,NULL,NULL,0),
 (8,'user02','ce9dcbe81b464a8b4ce104c5b9ad4e86c297d0f3','弘至','棚橋',0,1,NULL,'ja',NULL,'2023-07-08 07:01:16','2023-07-08 07:13:14','User','only_my_events','c4706a925cba8d84a64a1877de1b5808',0,'2023-07-08 07:13:14',NULL,NULL,NULL,0),
@@ -2221,7 +2222,7 @@ CREATE TABLE `workflows` (
   KEY `index_workflows_on_role_id` (`role_id`),
   KEY `index_workflows_on_new_status_id` (`new_status_id`),
   KEY `index_workflows_on_tracker_id` (`tracker_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2409,7 +2410,79 @@ INSERT INTO `workflows` VALUES
 (176,4,6,2,3,0,0,'WorkflowTransition',NULL,NULL),
 (177,4,6,3,3,0,0,'WorkflowTransition',NULL,NULL),
 (178,4,6,4,3,0,0,'WorkflowTransition',NULL,NULL),
-(179,4,6,5,3,0,0,'WorkflowTransition',NULL,NULL);
+(179,4,6,5,3,0,0,'WorkflowTransition',NULL,NULL),
+(180,4,0,1,4,0,0,'WorkflowTransition',NULL,NULL),
+(181,4,0,2,4,0,0,'WorkflowTransition',NULL,NULL),
+(182,4,0,3,4,0,0,'WorkflowTransition',NULL,NULL),
+(183,4,0,4,4,0,0,'WorkflowTransition',NULL,NULL),
+(184,4,0,5,4,0,0,'WorkflowTransition',NULL,NULL),
+(185,4,0,6,4,0,0,'WorkflowTransition',NULL,NULL),
+(186,4,1,2,4,0,0,'WorkflowTransition',NULL,NULL),
+(187,4,1,3,4,0,0,'WorkflowTransition',NULL,NULL),
+(188,4,1,4,4,0,0,'WorkflowTransition',NULL,NULL),
+(189,4,1,5,4,0,0,'WorkflowTransition',NULL,NULL),
+(190,4,1,6,4,0,0,'WorkflowTransition',NULL,NULL),
+(191,4,2,1,4,0,0,'WorkflowTransition',NULL,NULL),
+(192,4,2,3,4,0,0,'WorkflowTransition',NULL,NULL),
+(193,4,2,4,4,0,0,'WorkflowTransition',NULL,NULL),
+(194,4,2,5,4,0,0,'WorkflowTransition',NULL,NULL),
+(195,4,2,6,4,0,0,'WorkflowTransition',NULL,NULL),
+(196,4,3,1,4,0,0,'WorkflowTransition',NULL,NULL),
+(197,4,3,2,4,0,0,'WorkflowTransition',NULL,NULL),
+(198,4,3,4,4,0,0,'WorkflowTransition',NULL,NULL),
+(199,4,3,5,4,0,0,'WorkflowTransition',NULL,NULL),
+(200,4,3,6,4,0,0,'WorkflowTransition',NULL,NULL),
+(201,4,4,1,4,0,0,'WorkflowTransition',NULL,NULL),
+(202,4,4,2,4,0,0,'WorkflowTransition',NULL,NULL),
+(203,4,4,3,4,0,0,'WorkflowTransition',NULL,NULL),
+(204,4,4,5,4,0,0,'WorkflowTransition',NULL,NULL),
+(205,4,4,6,4,0,0,'WorkflowTransition',NULL,NULL),
+(206,4,5,1,4,0,0,'WorkflowTransition',NULL,NULL),
+(207,4,5,2,4,0,0,'WorkflowTransition',NULL,NULL),
+(208,4,5,3,4,0,0,'WorkflowTransition',NULL,NULL),
+(209,4,5,4,4,0,0,'WorkflowTransition',NULL,NULL),
+(210,4,5,6,4,0,0,'WorkflowTransition',NULL,NULL),
+(211,4,6,1,4,0,0,'WorkflowTransition',NULL,NULL),
+(212,4,6,2,4,0,0,'WorkflowTransition',NULL,NULL),
+(213,4,6,3,4,0,0,'WorkflowTransition',NULL,NULL),
+(214,4,6,4,4,0,0,'WorkflowTransition',NULL,NULL),
+(215,4,6,5,4,0,0,'WorkflowTransition',NULL,NULL),
+(216,4,0,1,5,0,0,'WorkflowTransition',NULL,NULL),
+(217,4,0,2,5,0,0,'WorkflowTransition',NULL,NULL),
+(218,4,0,3,5,0,0,'WorkflowTransition',NULL,NULL),
+(219,4,0,4,5,0,0,'WorkflowTransition',NULL,NULL),
+(220,4,0,5,5,0,0,'WorkflowTransition',NULL,NULL),
+(221,4,0,6,5,0,0,'WorkflowTransition',NULL,NULL),
+(222,4,1,2,5,0,0,'WorkflowTransition',NULL,NULL),
+(223,4,1,3,5,0,0,'WorkflowTransition',NULL,NULL),
+(224,4,1,4,5,0,0,'WorkflowTransition',NULL,NULL),
+(225,4,1,5,5,0,0,'WorkflowTransition',NULL,NULL),
+(226,4,1,6,5,0,0,'WorkflowTransition',NULL,NULL),
+(227,4,2,1,5,0,0,'WorkflowTransition',NULL,NULL),
+(228,4,2,3,5,0,0,'WorkflowTransition',NULL,NULL),
+(229,4,2,4,5,0,0,'WorkflowTransition',NULL,NULL),
+(230,4,2,5,5,0,0,'WorkflowTransition',NULL,NULL),
+(231,4,2,6,5,0,0,'WorkflowTransition',NULL,NULL),
+(232,4,3,1,5,0,0,'WorkflowTransition',NULL,NULL),
+(233,4,3,2,5,0,0,'WorkflowTransition',NULL,NULL),
+(234,4,3,4,5,0,0,'WorkflowTransition',NULL,NULL),
+(235,4,3,5,5,0,0,'WorkflowTransition',NULL,NULL),
+(236,4,3,6,5,0,0,'WorkflowTransition',NULL,NULL),
+(237,4,4,1,5,0,0,'WorkflowTransition',NULL,NULL),
+(238,4,4,2,5,0,0,'WorkflowTransition',NULL,NULL),
+(239,4,4,3,5,0,0,'WorkflowTransition',NULL,NULL),
+(240,4,4,5,5,0,0,'WorkflowTransition',NULL,NULL),
+(241,4,4,6,5,0,0,'WorkflowTransition',NULL,NULL),
+(242,4,5,1,5,0,0,'WorkflowTransition',NULL,NULL),
+(243,4,5,2,5,0,0,'WorkflowTransition',NULL,NULL),
+(244,4,5,3,5,0,0,'WorkflowTransition',NULL,NULL),
+(245,4,5,4,5,0,0,'WorkflowTransition',NULL,NULL),
+(246,4,5,6,5,0,0,'WorkflowTransition',NULL,NULL),
+(247,4,6,1,5,0,0,'WorkflowTransition',NULL,NULL),
+(248,4,6,2,5,0,0,'WorkflowTransition',NULL,NULL),
+(249,4,6,3,5,0,0,'WorkflowTransition',NULL,NULL),
+(250,4,6,4,5,0,0,'WorkflowTransition',NULL,NULL),
+(251,4,6,5,5,0,0,'WorkflowTransition',NULL,NULL);
 /*!40000 ALTER TABLE `workflows` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -2422,4 +2495,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-08 15:17:36
+-- Dump completed on 2023-07-14  6:38:40
