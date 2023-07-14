@@ -1,7 +1,67 @@
-- name: Setup demo apl
+- name: Setup Demo Server 
   hosts: demo_server
   tasks:
 
+    # Install Podman
+    - name: Upgrade all packages
+      ansible.builtin.yum:
+        name: '*'
+        state: latest
+
+    - name: Install the latest version of podman
+      ansible.builtin.yum:
+        name: podman
+        state: latest
+
+    # Install demo-trouble
+    - name: Create demo-trouble mount directory
+      ansible.builtin.file:
+        path: /home/ec2-user/demo/mount/demo-trouble
+        state: directory
+
+    - name: Pull demo-trouble Container
+      ansible.builtin.shell:
+        cmd: podman pull quay.io/rhn_consulting_kemori/trouble-producer
+      
+    - name: Create demo-trouble Container Volume
+      ansible.builtin.shell:
+        cmd: podman volume create -o type=none -o device=/home/ec2-user/demo/mount/demo-trouble -o o=bind datastore
+
+    - name: Run demo-trouble Container
+      ansible.builtin.shell:
+        cmd: podman run --security-opt label=disable -d -v datastore:/app/log --name demo-trouble -p 8032:8032 quay.io/rhn_consulting_kemori/trouble-producer
+
+    # Install Sample-Apl
+    - name: Pull Sample-Apl Container
+      ansible.builtin.shell:
+        cmd: podman pull quay.io/rhn_consulting_kemori/sample-apl
+
+    - name: Run Sample-Apl Container
+      ansible.builtin.shell:
+        cmd: podman run -d --name sample-apl -p 8088:8088 quay.io/rhn_consulting_kemori/sample-apl
+
+    # Install Redmine
+    - name: Pull Redmine ContainerImage
+      ansible.builtin.shell:
+        cmd: podman pull docker.io/library/redmine
+
+    - name: Pull MySQL ContainerImage
+      ansible.builtin.shell:
+        cmd: podman pull docker.io/library/mariadb
+
+    - name: Create Redmine Pod
+      ansible.builtin.shell:
+        cmd: podman pod create -p 3000:3000 --name redmine-pod
+
+    - name: Run MySQL Container
+      ansible.builtin.shell:
+        cmd: podman run --name=redmine-db -d --pod redmine-pod --env='MYSQL_DATABASE=redmine' --env='MYSQL_ROOT_PASSWORD=rootmine' --env='MYSQL_USER=redmine' --env='MYSQL_PASSWORD=r3dmin3' docker.io/library/mariadb
+
+    - name: Run Redmine Container
+      ansible.builtin.shell:
+        cmd: podman run --name=redmine-web -d --pod redmine-pod --env='REDMINE_DB_MYSQL=127.0.0.1' --env='REDMINE_DB_USERNAME=redmine' --env='REDMINE_DB_PASSWORD=r3dmin3' docker.io/library/redmine
+
+    # Redmine Data SetUp
     - name: Create data directory
       ansible.builtin.file:
         path: /home/ec2-user/demo/data/
