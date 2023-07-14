@@ -1,7 +1,21 @@
 - name: Setup demo apl
   hosts: demo_server
   tasks:
-    - name: Copy dmp file
+
+    - name: Create data directory
+      ansible.builtin.file:
+        path: /home/ec2-user/demo/data/
+        state: directory
+
+    - name: Copy dmpfile to EC2
       ansible.builtin.copy:
         src: ./data/db_redmine.dmp
         dest: /home/ec2-user/demo/data/
+
+    - name: Copy dmpfile to Redmine-DB Container
+      ansible.builtin.shell:
+        cmd: podman cp /home/ec2-user/demo/data/db_redmine.dmp redmine-db:/tmp/
+
+    - name: Restore Redmine-DB
+      ansible.builtin.shell:
+        cmd: podman exec redmine-db bash -c 'mariadb -uredmine -pr3dmin3 redmine < /tmp/db_redmine.dmp'
