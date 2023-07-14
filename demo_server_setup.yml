@@ -1,0 +1,7 @@
+- name: Setup demo apl
+  hosts: demo_server
+  tasks:
+    - name: Copy dmp file
+      ansible.builtin.copy:
+        src: ./data/db_redmine.dmp
+        dest: /home/ec2-user/demo/data/
