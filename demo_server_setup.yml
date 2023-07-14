@@ -7,13 +7,13 @@
       ansible.builtin.yum:
         name: '*'
         state: latest
-        become: yes
+      become: yes
 
     - name: Install the latest version of podman
       ansible.builtin.yum:
         name: podman
         state: latest
-        become: yes
+      become: yes
 
     # Install demo-trouble
     - name: Create demo-trouble mount directory
