@@ -1,0 +1,28 @@
+---
+- name: Hello Events
+  hosts: localhost
+
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
+
+  rules:
+    - name: Data send
+      condition: event.payload.datatype == "trouble"
+      action:
+        run_job_template:
+          name: test_playbook2
+          organization: Default
+          job_args:
+            issue:
+              project_id: "1"
+              tracker_id: "4"
+              subject: event.payload.subject
+              description: event.payload.description
+              system_name: event.payload.system_name
+              timestamp: event.payload.timestamp
+              err_id: event.payload.err_id
+              err_target: event.payload.err_target
+              err_code: event.payload.err_code
+              context: event.payload.context
