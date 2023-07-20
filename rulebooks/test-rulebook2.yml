@@ -15,5 +15,4 @@
           name: test_playbook2
           organization: Default
           job_args:
-            extra-vars:
-              issue: event.payload.subject
+            issue: event.payload.subject
