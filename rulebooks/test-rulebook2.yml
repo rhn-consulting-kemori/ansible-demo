@@ -9,11 +9,14 @@
 
   rules:
     - name: Data send
-      condition: event.payload.datatype == "trouble"
+      condition: 
+        all:
+          - event.payload.datatype == "trouble"
+          - event.payload.subject is defined
       action:
         run_job_template:
           name: test_playbook2
           organization: Default
           job_args:
             extra_vars:
-              issue: test-issue
+              issue: "{{ event.payload.subject }}"
