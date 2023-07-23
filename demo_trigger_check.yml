@@ -35,5 +35,5 @@
         url: "http://54.159.113.126:5000"
         method: POST
         body_format: json
-        body: "{{ items }}"
+        body: "{{ item }}"
       with_items: "{{ result.stdout_lines }}"
