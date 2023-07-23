@@ -28,4 +28,4 @@
 
     - name: API Post
       ansible.builtin.debug:
-        var: result
+        var: result.stdout_lines
