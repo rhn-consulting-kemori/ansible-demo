@@ -32,7 +32,7 @@
       
     - name: API Post
       uri:
-        url: "http://54.159.113.126:5000"
+        url: "{{ check_url }}"
         method: POST
         body_format: json
         body: "{{ item }}"
