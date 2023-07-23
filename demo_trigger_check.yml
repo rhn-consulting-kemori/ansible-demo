@@ -26,7 +26,14 @@
         cmd: diff /home/ec2-user/demo/data/ERR_new.log /home/ec2-user/demo/data/ERR_old.log | sed -e '1,1d' | sed -e 's/< //g'
       register: result
 
-    - name: API Post
+    - name: Check Result
       ansible.builtin.debug:
-        msg: "{{ item }}"
+        var: result.stdout_lines
+      
+    - name: API Post
+      uri:
+        url: "http://54.159.113.126:5000"
+        method: POST
+        body_format: json
+        body: "{{ items }}"
       with_items: "{{ result.stdout_lines }}"
