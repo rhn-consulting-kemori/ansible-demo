@@ -6,4 +6,4 @@
   tasks:
     - name: debug parameter
       ansible.builtin.debug:
-        msg: "{{ system_name }}-{{ timestamp }}-{{ err_id }}-{{ err_target }}-{{ err_code }}-{{ context }}-{{ memo }}"
+        msg: "{{ ansible_eda.event.payload.system_name }}-{{ ansible_eda.event.payload.timestamp }}-{{ ansible_eda.event.payload.err_id }}-{{ ansible_eda.event.payload.err_target }}-{{ ansible_eda.event.payload.err_code }}-{{ ansible_eda.event.payload.context }}-{{ ansible_eda.event.payload.memo }}"

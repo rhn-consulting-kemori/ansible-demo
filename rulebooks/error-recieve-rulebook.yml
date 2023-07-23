@@ -14,12 +14,3 @@
         run_job_template:
           name: test_playbook3
           organization: Default
-          job_args:
-            extra_vars:
-              system_name: '{{ event.payload.system_name }}'
-              timestamp: Test-timestamp
-              err_id: Test-err-id
-              err_target: Test-err_target
-              err_code: Test-err_code
-              context: Test-context
-              memo: Test-memo 
