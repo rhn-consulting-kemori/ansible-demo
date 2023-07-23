@@ -1,0 +1,31 @@
+- name: Check Demo Trigger
+  hosts: demo_server
+  tasks:
+
+    - name: Create Empty File
+      ansible.builtin.file:
+        path: /home/ec2-user/demo/data/ERR_new.log
+        state: touch
+        access_time: preserve
+        modification_time: preserve
+
+    - name: Copy from Check New to Old
+      ansible.builtin.copy:
+        src: /home/ec2-user/demo/data/ERR_new.log
+        dest: /home/ec2-user/demo/data/ERR_old.log
+        remote_src: yes
+
+    - name: Copy to Check New
+      ansible.builtin.copy:
+        src: /home/ec2-user/demo/mount/demo-trouble/ERR.log
+        dest: /home/ec2-user/demo/data/ERR_new.log
+        remote_src: yes
+
+    - name: Check Trigger
+      ansible.builtin.shell:
+        cmd: diff /home/ec2-user/demo/data/ERR_new.log /home/ec2-user/demo/data/ERR_old.log | sed -e '1,1d' | sed -e 's/< //g'
+      register: result
+
+    - name: API Post
+      ansible.builtin.debug:
+        var: result
