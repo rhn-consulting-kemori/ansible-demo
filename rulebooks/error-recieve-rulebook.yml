@@ -16,4 +16,4 @@
           organization: Default
           job_args:
             extra_vars:
-              issue: "{{ event.payload }}"
+              issue: "{{ event.payload.system_name }}"
