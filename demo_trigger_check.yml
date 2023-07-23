@@ -28,4 +28,5 @@
 
     - name: API Post
       ansible.builtin.debug:
-        var: result.stdout_lines
+        msg: "{{ item }}"
+      with_items: "{{ result.stdout_lines }}"
