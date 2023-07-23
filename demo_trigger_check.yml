@@ -36,4 +36,9 @@
         method: POST
         body_format: json
         body: "{{ item }}"
+      register: api_result
       with_items: "{{ result.stdout_lines }}"
+
+    - name: debug API-result
+      ansible.builtin.debug:
+        var: api_result
