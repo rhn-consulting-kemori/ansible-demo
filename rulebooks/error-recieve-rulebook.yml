@@ -15,5 +15,7 @@
           name: test_playbook2
           organization: Default
           job_args:
-            extra_vars:
-              issue: "{ \"system_name\": \"{{ event.payload.system_name }}\", \"timestamp\": \"{{ event.payload.timestamp }}\" }"
+            extra_vars: |-
+              {
+                "issue": "{ \"system_name\": \"{{ event.payload.system_name }}\", \"timestamp\": \"{{ event.payload.timestamp }}\" }"
+              }
