@@ -6,4 +6,4 @@
   tasks:
     - name: debug msg
       ansible.builtin.debug:
-        msg: HELLO!!
+        msg: "{{ event }}"
