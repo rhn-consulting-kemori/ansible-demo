@@ -5,5 +5,7 @@
 
   tasks:
     - name: debug project_id
+      vars:
+        data: "{{ issue | from_json }}"
       ansible.builtin.debug:
-        msg: "{{ issue }}"
+        msg: "{{ data.system_name }}-{{ data.timestamp }}-{{ data.err_id }}-{{ data.err_target }}-{{ data.err_code }}-{{ data.context }}-{{ data.memo }}"
