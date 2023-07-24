@@ -11,16 +11,14 @@
     - name: Error Recieve
       condition: event.payload.system_name is defined 
       vars: 
-        data: |-
-          { 
-            "system_name": "{{ event.payload.system_name }}", 
-            "timestamp": "{{ event.payload.timestamp }}",
-            "err_id": "{{ event.payload.err_id }}",
-            "err_target": "{{ event.payload.err_target }}",
-            "err_code": "{{ event.payload.err_code }}",
-            "context": "{{ event.payload.context }}",
-            "memo": "{{ event.payload.memo }}" 
-          } 
+        data: 
+          system_name": "{{ event.payload.system_name }}"
+          timestamp": "{{ event.payload.timestamp }}"
+          err_id": "{{ event.payload.err_id }}"
+          err_target": "{{ event.payload.err_target }}"
+          err_code": "{{ event.payload.err_code }}"
+          context": "{{ event.payload.context }}"
+          memo": "{{ event.payload.memo }}"  
       action:
         run_job_template:
           name: test_playbook2
