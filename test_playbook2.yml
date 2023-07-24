@@ -8,4 +8,4 @@
       vars:
         data: "{{ issue | from_json }}"
       ansible.builtin.debug:
-        msg: "{{ data.system_name }}-{{ data.timestamp }}-{{ data.err_id }}-{{ data.err_target }}-{{ data.err_code }}-{{ data.context }}-{{ data.memo }}"
+        msg: "{{ data.system_name }}-{{ data.timestamp }}"
