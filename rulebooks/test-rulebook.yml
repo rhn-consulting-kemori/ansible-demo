@@ -14,3 +14,5 @@
         run_job_template:
           name: test_playbook
           organization: Default
+          job_args:
+            event: "{{ event.payload }}"
