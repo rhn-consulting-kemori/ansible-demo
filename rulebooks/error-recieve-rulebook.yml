@@ -15,13 +15,4 @@
           name: test_playbook3
           organization: Default
           job_args:
-            extra_vars: |-
-              {
-                "system_name": "test1", 
-                "timestamp": "test2", 
-                "err_id": "test3", 
-                "err_target": "test4", 
-                "err_code": "test5", 
-                "context": "test6", 
-                "memo": "test7"
-              }
+            extra_vars: "{{ event.payload }}"

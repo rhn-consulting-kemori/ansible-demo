@@ -6,4 +6,4 @@
   tasks:
     - name: debug msg
       ansible.builtin.debug:
-        msg: "{{ job_args.event }}"
+        msg: HELLO!
