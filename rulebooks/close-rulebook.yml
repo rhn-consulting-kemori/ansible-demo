@@ -11,7 +11,7 @@
       condition: event.payload.request == "close"
       actions:
         - run_job_template:
-            name: Redmine Issue Status Update1
+            name: Redmine Issue Status Update
             organization: Default
             job_args: 
               extra_vars: 
@@ -19,7 +19,7 @@
                 status_id: "3"
 
         - run_job_template:
-            name: Redmine Issue Status Update2
+            name: Redmine Issue Status Update
             organization: Default
             job_args: 
               extra_vars: 
