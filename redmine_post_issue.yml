@@ -14,17 +14,17 @@
         body: |-
           {
             "issue": {
-              "project_id": "{{ issue.project_id }}",
-              "tracker_id": "{{ issue.tracker_id }}",
-              "subject": "{{ issue.subject }}",
-              "description": "{{ issue.description }}",
+              "project_id": "{{ project_id }}",
+              "tracker_id": "{{ tracker_id }}",
+              "subject": "{{ subject }}",
+              "description": "{{ description }}",
               "custom_fields":[
-                {"id":1,"value":"{{ issue.system_name }}"},
-                {"id":2,"value":"{{ issue.timestamp }}"},
-                {"id":3,"value":"{{ issue.err_id }}"},
-                {"id":4,"value":"{{ issue.err_target }}"},
-                {"id":5,"value":"{{ issue.err_code }}"},
-                {"id":6,"value":"{{ issue.context }}"}
+                {"id":1,"value":"{{ system_name }}"},
+                {"id":2,"value":"{{ timestamp }}"},
+                {"id":3,"value":"{{ err_id }}"},
+                {"id":4,"value":"{{ err_target }}"},
+                {"id":5,"value":"{{ err_code }}"},
+                {"id":6,"value":"{{ context }}"}
               ]
             }
           }

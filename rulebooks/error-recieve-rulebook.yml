@@ -10,16 +10,21 @@
   rules:
     - name: Error Recieve
       condition: event.payload.system_name is defined and event.payload.timestamp is defined and event.payload.err_id is defined and event.payload.err_target is defined and event.payload.err_code is defined and event.payload.context is defined and event.payload.memo is defined 
-      action:
-        run_job_template:
-          name: test_playbook3
-          organization: Default
-          job_args: 
-            extra_vars: 
-              systemname: '"{{ event.payload.system_name }}"'
-              timestamp: '"{{ event.payload.timestamp }}"'
-              errid: '"{{ event.payload.err_id }}"'
-              errtarget: '"{{ event.payload.err_target }}"'
-              errcode: '"{{ event.payload.err_code }}"'
-              context: '"{{ event.payload.context }}"'
-              memo: '"{{ event.payload.memo }}"'
+      actions:
+        - run_job_template:
+            name: Sample-apl Stop
+            organization: Default
+
+        - run_job_template:
+            name: Redmine Issue Post
+            organization: Default
+            job_args: 
+              extra_vars: 
+                subject: '"[障害]{{ event.payload.err_id }}"'
+                description: '"{{ event.payload.context }}\n{{ event.payload.memo }}"'
+                system_name: '"{{ event.payload.system_name }}"'
+                timestamp: '"{{ event.payload.timestamp }}"'
+                err_id: '"{{ event.payload.err_id }}"'
+                err_target: '"{{ event.payload.err_target }}"'
+                err_code: '"{{ event.payload.err_code }}"'
+                context: ""
