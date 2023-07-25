@@ -5,7 +5,7 @@
   sources:
     - ansible.eda.webhook:
         host: 0.0.0.0
-        port: 5000
+        port: 5001
 
   rules:
     - name: Error Recieve
@@ -16,10 +16,10 @@
           organization: Default
           job_args:
             extra_vars:
-              system_name: '"{{ event.payload.system_name }}"'
+              systemname: '"{{ event.payload.system_name }}"'
               timestamp: '"{{ event.payload.timestamp }}"'
-              err_id: '"{{ event.payload.err_id }}"'
-              err_target: '"{{ event.payload.err_target }}"'
-              err_code: '"{{ event.payload.err_code }}"'
+              errid: '"{{ event.payload.err_id }}"'
+              errtarget: '"{{ event.payload.err_target }}"'
+              errcode: '"{{ event.payload.err_code }}"'
               context: '"{{ event.payload.context }}"'
               memo: '"{{ event.payload.memo }}"'
