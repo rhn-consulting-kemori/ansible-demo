@@ -27,4 +27,4 @@
                 err_id: '"{{ event.payload.err_id }}"'
                 err_target: '"{{ event.payload.err_target }}"'
                 err_code: '"{{ event.payload.err_code }}"'
-                context: ""
+                context: "-"
