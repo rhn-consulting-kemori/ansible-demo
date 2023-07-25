@@ -1,7 +1,7 @@
-- name: redmine put issue1
+- name: redmine put issue2
   hosts: demo_server
   tasks:
-    - name: Update Issue Only Status
+    - name: Update Issue with Context
       ansible.builtin.uri:
         url: http://{{ ip_address }}:3000/issues/{{ ticket_no }}.json
         method: PUT
@@ -14,7 +14,10 @@
         body: |-
           {
             "issue": {
-              "status_id": "{{ status_id }}"
+              "status_id": "{{ status_id }}",
+              "custom_fields":[
+                {"id":6,"value":"{{ context }}"}
+              ]
             }
           }
       register: result
