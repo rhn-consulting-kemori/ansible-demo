@@ -9,7 +9,15 @@
 
   rules:
     - name: Error Recieve
-      condition: event.payload.system_name is defined  
+      condition: 
+        all:
+          - event.payload.system_name is defined
+          - event.payload.timestamp is defined
+          - event.payload.err_id is defined 
+          - event.payload.err_target is defined 
+          - event.payload.err_code is defined 
+          - event.payload.context is defined 
+          - event.payload.memo is defined 
       action:
         run_job_template:
           name: test_playbook3
