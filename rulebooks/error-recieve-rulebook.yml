@@ -12,10 +12,14 @@
       condition: event.payload.system_name is defined  
       action:
         run_job_template:
-          name: test_playbook2
+          name: test_playbook3
           organization: Default
           job_args:
-            extra_vars: |-
-              {
-                "issue": "{ \"system_name\": \"{{ event.payload.system_name }}\", \"timestamp\": \"{{ event.payload.timestamp }}\" }"
-              }
+            extra_vars:
+              system_name: '"{{ event.payload.system_name }}"'
+              timestamp: '"{{ event.payload.timestamp }}"'
+              err_id: '"{{ event.payload.err_id }}"'
+              err_target: '"{{ event.payload.err_target }}"'
+              err_code: '"{{ event.payload.err_code }}"'
+              context: '"{{ event.payload.context }}"'
+              memo: '"{{ event.payload.memo }}"'
