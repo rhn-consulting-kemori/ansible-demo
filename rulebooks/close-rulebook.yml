@@ -1,15 +1,27 @@
-- name: Error Recieve Rulebook
+- name: Trouble Recover Close Rulebook
   hosts: localhost
 
   sources:
     - ansible.eda.webhook:
         host: 0.0.0.0
-        port: 5001
+        port: 5003
 
   rules:
-    - name: Error Recieve
-      condition: event.payload.system_name is defined
+    - name: Close Trouble
+      condition: event.payload.request == "close"
       actions:
         - run_job_template:
-            name: Sample-apl Stop
+            name: Redmine Issue Status Update1
             organization: Default
+            job_args: 
+              extra_vars: 
+                ticket_no: '"{{ event.payload.ticket_no }}"'
+                status_id: "3"
+
+        - run_job_template:
+            name: Redmine Issue Status Update2
+            organization: Default
+            job_args: 
+              extra_vars: 
+                ticket_no: '"{{ event.payload.ticket_no }}"'
+                status_id: "5"
