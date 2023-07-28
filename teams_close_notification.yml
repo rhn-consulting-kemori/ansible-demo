@@ -31,7 +31,7 @@
                   {"name": "システム","value": "{{ result_get.json.issue.custom_fields[0].value }}"},
                   {"name": "障害ID","value": "{{ result_get.json.issue.custom_fields[2].value }}"},
                   {"name": "障害発生日時","value": "{{ result_get.json.issue.custom_fields[1].value }}"},
-                  {"name": "エラー情報","value": "エラー対象:{{ result_get.json.issue.custom_fields[3].value }}</br>エラーコード:{{ result_get.json.issue.custom_fields[4].value }}</br>説明:{{ result_get.json.issue.description }}"},
+                  {"name": "エラー情報","value": "エラー対象:{{ result_get.json.issue.custom_fields[3].value }}, エラーコード:{{ result_get.json.issue.custom_fields[4].value }}</br>説明:{{ result_get.json.issue.description }}"},
                   {"name": "対応","value": "- {{ result_get.json.issue.custom_fields[5].value | regex_replace(',', '\r- ') }}"},
                   {"name": "障害票","value": "[Redmine](http://{{ ex_ip_address }}:3000/issues/{{ ticket_no }})"}
                 ],
