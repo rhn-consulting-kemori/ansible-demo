@@ -29,7 +29,7 @@
                 "activityImage": "https://teamsnodesample.azurewebsites.net/static/img/image5.png",
                 "facts": [
                   {"name": "システム","value": "{{ result_get.json.issue.custom_fields[0].value }}"},
-                  {"name": "障害ID","{{ result_get.json.issue.custom_fields[2].value }}"},
+                  {"name": "障害ID","value": "{{ result_get.json.issue.custom_fields[2].value }}"},
                   {"name": "障害発生日時","value": "{{ result_get.json.issue.custom_fields[1].value }}"},
                   {"name": "エラー情報","value": "エラー対象:{{ result_get.json.issue.custom_fields[3].value }}\nエラーコード:{{ result_get.json.issue.custom_fields[4].value }}\n説明:{{ result_get.json.issue.description }}"},
                   {"name": "対応","value": "{{ result_get.json.issue.custom_fields[5].value }}"},
