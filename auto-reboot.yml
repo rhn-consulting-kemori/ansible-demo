@@ -36,12 +36,9 @@
           } 
       register: result_post
 
-    - name: Update Issue
-      vars:
-        ticket_no: "{{ result_post.json.issue.id }}"
- 
+    - name: Update Issue 
       ansible.builtin.uri:
-        url: http://{{ ip_address }}:3000/issues/{{ ticket_no }}.json
+        url: http://{{ ip_address }}:3000/issues/{{ result_post.json.issue.id }}.json
         method: PUT
         body_format: json
         status_code: 204
@@ -59,7 +56,7 @@
 
     - name: Get Issue
       ansible.builtin.uri:
-        url: http://{{ ip_address }}:3000/issues/{{ ticket_no }}.json
+        url: http://{{ ip_address }}:3000/issues/{{ result_post.json.issue.id }}.json
         method: GET
         return_content: true
         headers:
@@ -89,7 +86,7 @@
                   {"name": "障害発生日時","value": "{{ result_get.json.issue.custom_fields[1].value }}"},
                   {"name": "エラー情報","value": "エラー対象:{{ result_get.json.issue.custom_fields[3].value }}, エラーコード:{{ result_get.json.issue.custom_fields[4].value }}</br>説明:{{ result_get.json.issue.description }}"},
                   {"name": "対応","value": "- {{ result_get.json.issue.custom_fields[5].value | regex_replace(',', '\r- ') }}"},
-                  {"name": "障害票","value": "[Redmine](http://{{ ex_ip_address }}:3000/issues/{{ ticket_no }})"}
+                  {"name": "障害票","value": "[Redmine](http://{{ ex_ip_address }}:3000/issues/{{ result_post.json.issue.id }})"}
                 ],
                 "markdown": true
               }
