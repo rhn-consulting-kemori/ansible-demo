@@ -41,6 +41,7 @@
               {
                 "@type": "HttpPOST",
                 "name": "完了依頼",
+                "headers": "Content-Type:application/json",
                 "target": "http://{{ eda_server }}"
               }
             ]
