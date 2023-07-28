@@ -1,5 +1,5 @@
 - name: Teams Close Notification
-  hosts: localhost
+  hosts: demo_server
   tasks:
     - name: Get Issue
       ansible.builtin.uri:
