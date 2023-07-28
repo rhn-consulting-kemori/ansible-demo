@@ -7,7 +7,7 @@
         port: 5002
 
   rules:
-    - name: Reboot Sample-Apl
+    - name: Reboot & Recover
       condition: event.payload.request == "reboot"
       actions:
         - run_job_template:
