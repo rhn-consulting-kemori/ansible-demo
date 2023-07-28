@@ -29,7 +29,7 @@
             "issue": {
               "status_id": "{{ status_id }}",
               "custom_fields":[
-                {"id":6,"value":"{{ result_get.json.issue.custom_fields[5].value }}\\n{{ context }}:{{ datetime }}"}
+                {"id":6,"value":"{{ result_get.json.issue.custom_fields[5].value }}\n{{ context }}:{{ datetime }}"}
               ]
             }
           }
