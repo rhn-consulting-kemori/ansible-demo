@@ -41,7 +41,7 @@
               {
                 "@type": "HttpPOST",
                 "name": "完了依頼",
-                "target": "http://{{ eda_server }}",
+                "target": "http:\/\/{{ eda_server }}",
                 "headers": [
                   {
                     "name": "content-type",
