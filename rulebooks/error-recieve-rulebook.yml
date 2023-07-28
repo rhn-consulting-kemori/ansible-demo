@@ -2,19 +2,31 @@
 - name: Error Recieve Rulebook
   hosts: localhost
 
+  vars_files:
+    - ./conf/err_rule_conf.yml
+
   sources:
     - ansible.eda.webhook:
         host: 0.0.0.0
         port: 5001
 
   rules:
-    - name: Error Recieve
-      condition: event.payload.system_name is defined and event.payload.timestamp is defined and event.payload.err_id is defined and event.payload.err_target is defined and event.payload.err_code is defined and event.payload.context is defined and event.payload.memo is defined 
-      actions:
+    - name: Error Stop
+      condition: event.payload.system_name is defined
+      action:
         - run_job_template:
             name: Sample-apl Stop
             organization: Default
 
+    - name: Auto Reboot
+      condition: event.payload.system_name in system_list
+      action:
+        debug:
+          msg: "auto reboot"
+
+    - name: Recomfirm Reboot
+      condition: event.payload.system_name not in system_list
+      action:
         - run_job_template:
             name: Teams Action Notification
             organization: Default
