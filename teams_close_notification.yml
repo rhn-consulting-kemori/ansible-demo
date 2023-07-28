@@ -1,5 +1,6 @@
 - name: Teams Close Notification
   hosts: localhost
+  tasks:
     - name: Get Issue
       ansible.builtin.uri:
         url: http://{{ ip_address }}:3000/issues/{{ ticket_no }}.json
