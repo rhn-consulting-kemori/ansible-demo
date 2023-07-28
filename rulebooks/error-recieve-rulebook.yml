@@ -16,15 +16,14 @@
             organization: Default
 
         - run_job_template:
-            name: Redmine Issue Post
+            name: Teams Action Notification
             organization: Default
             job_args: 
               extra_vars: 
                 subject: '"[障害]{{ event.payload.err_id }}"'
-                description: '"{{ event.payload.context }}\\n{{ event.payload.memo }}"'
+                description: '"{{ event.payload.context }}"'
                 system_name: '"{{ event.payload.system_name }}"'
                 timestamp: '"{{ event.payload.timestamp }}"'
                 err_id: '"{{ event.payload.err_id }}"'
                 err_target: '"{{ event.payload.err_target }}"'
                 err_code: '"{{ event.payload.err_code }}"'
-                context: "-"
