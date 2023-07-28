@@ -41,8 +41,8 @@
               {
                 "@type": "HttpPOST",
                 "name": "完了依頼",
-                "headers": "Content-Type:application/json",
-                "target": "http://{{ eda_server }}"
+                "target": "http://{{ eda_server }}",
+                "body": "{\"request\": \"close\", \"ticket_no\": \"{{ ticket_no }}\"}"
               }
             ]
           }
