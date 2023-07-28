@@ -17,9 +17,23 @@
 
     - name: Auto Reboot
       condition: event.payload.system_name == "system_auto"
-      action:
-        debug:
-          msg: "auto reboot"
+      actions:
+        - run_job_template:
+            name: Sample-apl Start
+            organization: Default
+
+        - run_job_template:
+            name: Auto Reboot
+            organization: Default
+            job_args: 
+              extra_vars: 
+                subject: '"[障害]{{ event.payload.err_id }}"'
+                description: '"{{ event.payload.context }}"'
+                system_name: '"{{ event.payload.system_name }}"'
+                timestamp: '"{{ event.payload.timestamp }}"'
+                err_id: '"{{ event.payload.err_id }}"'
+                err_target: '"{{ event.payload.err_target }}"'
+                err_code: '"{{ event.payload.err_code }}"' 
 
     - name: Recomfirm Reboot
       condition: event.payload.system_name != "system_auto"
