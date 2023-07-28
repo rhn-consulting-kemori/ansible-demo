@@ -28,3 +28,10 @@
                 ticket_no: '"{{ event.payload.ticket_no }}"'
                 status_id: "5"
                 context: "Close"
+
+        - run_job_template:
+            name: Teams Close Notification
+            organization: Default
+            job_args: 
+              extra_vars: 
+                ticket_no: '"{{ event.payload.ticket_no }}"'
