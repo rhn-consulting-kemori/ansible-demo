@@ -2,11 +2,6 @@
 - name: Error Recieve Rulebook
   hosts: localhost
 
-  vars:
-    system_list:
-      - "system_auto"
-      - "system_smart"
-
   sources:
     - ansible.eda.webhook:
         host: 0.0.0.0
@@ -21,23 +16,23 @@
             organization: Default
 
     - name: Auto Reboot
-      condition: event.payload.system_name is defined
+      condition: event.payload.system_name == "system_auto"
       action:
         debug:
-          msg: "{{ system_list }}"
+          msg: "auto reboot"
 
-    # - name: Recomfirm Reboot
-    #  condition: event.payload.system_name not in system_list
-    #  action:
-    #    - run_job_template:
-    #        name: Teams Action Notification
-    #        organization: Default
-    #        job_args: 
-    #          extra_vars: 
-    #            subject: '"[障害]{{ event.payload.err_id }}"'
-    #            description: '"{{ event.payload.context }}"'
-    #            system_name: '"{{ event.payload.system_name }}"'
-    #            timestamp: '"{{ event.payload.timestamp }}"'
-    #            err_id: '"{{ event.payload.err_id }}"'
-    #            err_target: '"{{ event.payload.err_target }}"'
-    #            err_code: '"{{ event.payload.err_code }}"'
+    - name: Recomfirm Reboot
+      condition: event.payload.system_name != "system_auto"
+      action:
+        - run_job_template:
+            name: Teams Action Notification
+            organization: Default
+            job_args: 
+              extra_vars: 
+                subject: '"[障害]{{ event.payload.err_id }}"'
+                description: '"{{ event.payload.context }}"'
+                system_name: '"{{ event.payload.system_name }}"'
+                timestamp: '"{{ event.payload.timestamp }}"'
+                err_id: '"{{ event.payload.err_id }}"'
+                err_target: '"{{ event.payload.err_target }}"'
+                err_code: '"{{ event.payload.err_code }}"'
