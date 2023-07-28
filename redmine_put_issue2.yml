@@ -1,7 +1,22 @@
 - name: redmine put issue2
   hosts: demo_server
   tasks:
-    - name: Update Issue with Context
+    - name: Get Issue
+      ansible.builtin.uri:
+        url: http://{{ ip_address }}:3000/issues/{{ ticket_no }}.json
+        method: GET
+        return_content: true
+        headers:
+          Content-Type: application/json
+          X-Redmine-API-Key: "{{ api_key }}" 
+      register: result_get
+
+    - name: Update Issue with Description
+      vars:
+        date1: '{{ lookup(''pipe'', ''date "+%Y-%m-%d %H:%M:%S"'') }}'
+        date2: "{{ date1 | to_datetime('%Y-%m-%d %H:%M:%S') }}"
+        date3: '{{ lookup(''pipe'', ''date -d "{{ date2 }} 9 hour" "+%Y/%m/%d %H:%M:%S"'') }}'
+
       ansible.builtin.uri:
         url: http://{{ ip_address }}:3000/issues/{{ ticket_no }}.json
         method: PUT
@@ -15,8 +30,9 @@
           {
             "issue": {
               "status_id": "{{ status_id }}",
+              "description": "{{ result_get.json.issue.description }}\n{{ action_memo }}",
               "custom_fields":[
-                {"id":6,"value":"{{ context }}"}
+                {"id":6,"value":"{{ result_get.json.issue.custom_fields[5].value }},{{ context }}:{{ date3 }}"}
               ]
             }
           }
