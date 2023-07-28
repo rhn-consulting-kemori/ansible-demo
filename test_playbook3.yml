@@ -1,9 +1,0 @@
----
-- name: debug msg play
-  hosts: localhost
-  gather_facts: false
-
-  tasks:
-    - name: debug parameter
-      ansible.builtin.debug:
-        msg: "{{ systemname }}-{{ timestamp }}-{{ errid }}-{{ errtarget }}-{{ errcode }}-{{ context }}-{{ memo }}"
