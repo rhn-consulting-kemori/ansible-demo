@@ -9,6 +9,7 @@
   rules:
     - name: Close Trouble
       condition: event.payload.request == "close"
+
       actions:
         - run_job_template:
             name: Redmine Issue Status Update
@@ -17,6 +18,7 @@
               extra_vars: 
                 ticket_no: '"{{ event.payload.ticket_no }}"'
                 status_id: "3"
+                context: "Complete"
 
         - run_job_template:
             name: Redmine Issue Status Update
@@ -25,3 +27,4 @@
               extra_vars: 
                 ticket_no: '"{{ event.payload.ticket_no }}"'
                 status_id: "5"
+                context: "Close"

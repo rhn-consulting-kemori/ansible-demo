@@ -2,6 +2,8 @@
   hosts: demo_server
   tasks:
     - name: Post Issue
+      vars:
+        datetime: '{{ lookup(''pipe'', ''date "+%Y-%m-%d %H:%M:%S"'') }}'
       ansible.builtin.uri:
         url: http://{{ ip_address }}:3000/issues.json
         method: POST
@@ -24,7 +26,7 @@
                 {"id":3,"value":"{{ err_id }}"},
                 {"id":4,"value":"{{ err_target }}"},
                 {"id":5,"value":"{{ err_code }}"},
-                {"id":6,"value":"{{ context }}"}
+                {"id":6,"value":"Error:{{ timestamp }}\\nEventCreate:{{ datetime }}"}
               ]
             }
           } 
