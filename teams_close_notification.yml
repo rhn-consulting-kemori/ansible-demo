@@ -1,0 +1,45 @@
+- name: Teams Close Notification
+  hosts: localhost
+    - name: Get Issue
+      ansible.builtin.uri:
+        url: http://{{ ip_address }}:3000/issues/{{ ticket_no }}.json
+        method: GET
+        return_content: true
+        headers:
+          Content-Type: application/json
+          X-Redmine-API-Key: "{{ api_key }}" 
+      register: result_get
+
+    - name: Teams Notification
+      ansible.builtin.uri:
+        url: "{{ teams_webhook_url }}"
+        method: POST
+        body_format: json
+        body: |-
+          {
+            "@type": "MessageCard",
+            "@context": "http://schema.org/extensions",
+            "themeColor": "0076D7",
+            "summary": "Teams Notification",
+            "sections": [
+              {
+                "activityTitle": "障害クローズ通知",
+                "activitySubtitle": "{{ result_get.json.issue.subject }}",
+                "activityImage": "https://teamsnodesample.azurewebsites.net/static/img/image5.png",
+                "facts": [
+                  {"name": "システム","value": "{{ result_get.json.issue.custom_fields[0].value }}"},
+                  {"name": "障害ID","{{ result_get.json.issue.custom_fields[2].value }}"},
+                  {"name": "障害発生日時","value": "{{ result_get.json.issue.custom_fields[1].value }}"},
+                  {"name": "エラー情報","value": "エラー対象:{{ result_get.json.issue.custom_fields[3].value }}\nエラーコード:{{ result_get.json.issue.custom_fields[4].value }}\n説明:{{ result_get.json.issue.description }}"},
+                  {"name": "対応","value": "{{ result_get.json.issue.custom_fields[5].value }}"},
+                  {"name": "障害票","value": "[Redmine](http://{{ ex_ip_address }}:3000/issues/{{ ticket_no }})"} 
+                ],
+                "markdown": true
+              }
+            ]
+          }
+      register: result_put
+
+    - name: debug
+      ansible.builtin.debug:
+        var: result_put

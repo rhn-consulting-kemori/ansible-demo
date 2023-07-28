@@ -12,7 +12,7 @@
 
       actions:
         - run_job_template:
-            name: Redmine Issue Status Update
+            name: Redmine Issue Update
             organization: Default
             job_args: 
               extra_vars: 
@@ -21,7 +21,7 @@
                 context: "Complete"
 
         - run_job_template:
-            name: Redmine Issue Status Update
+            name: Redmine Issue Update
             organization: Default
             job_args: 
               extra_vars: 
