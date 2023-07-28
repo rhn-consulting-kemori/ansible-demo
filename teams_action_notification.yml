@@ -35,6 +35,50 @@
           } 
       register: result_post
 
+    - name: Teams Notification
+      ansible.builtin.uri:
+        url: "{{ teams_webhook_url }}"
+        method: POST
+        body_format: json
+        body: |-
+          {
+            "@type": "MessageCard",
+            "@context": "http://schema.org/extensions",
+            "themeColor": "0076D7",
+            "summary": "Teams Notification",
+            "sections": [
+              {
+                "activityTitle": "障害発生通知",
+                "activitySubtitle": "{{ result_post.json.issue.subject }}",
+                "activityImage": "https://teamsnodesample.azurewebsites.net/static/img/image5.png",
+                "facts": [
+                  {"name": "システム","value": "{{ result_post.json.issue.custom_fields[0].value }}"},
+                  {"name": "障害ID","value": "{{ result_post.json.issue.custom_fields[2].value }}"},
+                  {"name": "障害発生日時","value": "{{ result_post.json.issue.custom_fields[1].value }}"},
+                  {"name": "エラー情報","value": "エラー対象:{{ result_post.json.issue.custom_fields[3].value }}, エラーコード:{{ result_post.json.issue.custom_fields[4].value }}</br>説明:{{ result_post.json.issue.description }}"},
+                  {"name": "障害票","value": "[Redmine](http://{{ ex_ip_address }}:3000/issues/{{ result_post.json.issue.id }})"}
+                ],
+                "markdown": true
+              }
+            ],
+            "potentialAction": [
+              {
+                "@type": "HttpPOST",
+                "name": "再起動依頼",
+                "target": "http://{{ eda_server }}",
+                "headers": [
+                  {
+                    "name": "content-type",
+                    "value": "application/json"
+                  }
+                ],
+                "bodyContentType": "application/json",
+                "body": "{\"request\": \"reboot\", \"ticket_no\": \"{{ result_post.json.issue.id }}\", \"action_memo\": \"再起動で対応\"}"
+              }
+            ]
+          }
+      register: result_teams
+
     - name: debug
       ansible.builtin.debug:
-        var: result_post
+        var: result_teams
