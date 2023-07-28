@@ -36,6 +36,13 @@
                 ],
                 "markdown": true
               }
+            ],
+            "potentialAction": [
+              {
+                "@type": "HttpPOST",
+                "name": "完了依頼",
+                "target": "http://{{ eda_server }}"
+              }
             ]
           }
       register: result_put
