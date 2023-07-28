@@ -2,8 +2,10 @@
 - name: Error Recieve Rulebook
   hosts: localhost
 
-  vars_files:
-    - ./conf/err_rule_conf.yml
+  vars:
+    system_list:
+      - "system_auto"
+      - "system_smart"
 
   sources:
     - ansible.eda.webhook:
@@ -22,7 +24,7 @@
       condition: event.payload.system_name is defined
       action:
         debug:
-          var: system_list
+          msg: "{{ system_list }}"
 
     # - name: Recomfirm Reboot
     #  condition: event.payload.system_name not in system_list
