@@ -13,7 +13,9 @@
 
     - name: Update Issue
       vars:
-        datetime: '{{ lookup(''pipe'', ''date "+%Y-%m-%d %H:%M:%S"'') }}'
+        date1: '{{ lookup(''pipe'', ''date "+%Y-%m-%d %H:%M:%S"'') }}'
+        date2: "{{ date1 | to_datetime('%Y-%m-%d %H:%M:%S') }}"
+        date3: '{{ lookup(''pipe'', ''date -d "{{ date2 }} 9 hour" "+%Y/%m/%d %H:%M:%S"'') }}'
 
       ansible.builtin.uri:
         url: http://{{ ip_address }}:3000/issues/{{ ticket_no }}.json
@@ -29,7 +31,7 @@
             "issue": {
               "status_id": "{{ status_id }}",
               "custom_fields":[
-                {"id":6,"value":"{{ result_get.json.issue.custom_fields[5].value }},{{ context }}:{{ datetime }}"}
+                {"id":6,"value":"{{ result_get.json.issue.custom_fields[5].value }},{{ context }}:{{ date3 }}"}
               ]
             }
           }
