@@ -15,10 +15,11 @@
             organization: Default
 
         - run_job_template:
-            name: Redmine Issue Context Update
+            name: Redmine Issue Update With Description
             organization: Default
             job_args: 
               extra_vars: 
                 ticket_no: '"{{ event.payload.ticket_no }}"'
                 status_id: '"{{ event.payload.status_id }}"'
-                context: '"{{ event.payload.context }}"'
+                context: "2"
+                action_memo: "再起動で対応"
