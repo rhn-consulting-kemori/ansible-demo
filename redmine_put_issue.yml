@@ -1,3 +1,6 @@
+# Job-Template: Redmine Issue Update
+# Env Parameter: ip_address, api_key 
+# Survey Parameter: ticket_no, status_id, context 
 - name: redmine put issue
   hosts: demo_server
   tasks:

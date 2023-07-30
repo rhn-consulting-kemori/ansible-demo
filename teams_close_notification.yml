@@ -1,3 +1,6 @@
+# Job-Template: Teams Close Notification
+# Env Parameter:ip_address, api_key, teams_webhook_url, ex_ip_address 
+# Survey Parameter:ticket_no 
 - name: Teams Close Notification
   hosts: demo_server
   tasks:

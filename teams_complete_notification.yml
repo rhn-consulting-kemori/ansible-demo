@@ -1,3 +1,6 @@
+# Job-Template: Teams Complete Notification
+# Env Parameter: ip_address, api_key, teams_webhook_url, ex_ip_address, powerautomate_webhook_url 
+# Survey Parameter: ticket_no
 - name: Teams Complete Notification
   hosts: demo_server
   tasks:
@@ -36,25 +39,36 @@
                 ],
                 "markdown": true
               }
-            ],
-            "potentialAction": [
-              {
-                "@type": "HttpPOST",
-                "name": "完了依頼",
-                "target": "http://{{ eda_server }}",
-                "headers": [
-                  {
-                    "name": "content-type",
-                    "value": "application/json"
-                  }
-                ],
-                "bodyContentType": "application/json",
-                "body": "{\"request\": \"close\", \"ticket_no\": \"{{ ticket_no }}\"}"
-              }
             ]
           }
-      register: result_put
+      register: result_teams
 
-    - name: debug
+    - name: teams debug
       ansible.builtin.debug:
-        var: result_put
+        var: result_teams
+
+    - name: Powerautomates call close-list-recieve
+      ansible.builtin.uri:
+        url: "{{ powerautomate_webhook_url }}"
+        method: POST
+        body_format: json
+        headers:
+          Content-Type: application/json
+        body: |-
+          {
+            "list_name": "クローズ依頼リスト",
+            "subject": "{{ result_get.json.issue.subject }}",
+            "system_name": "{{ result_get.json.issue.custom_fields[0].value }}",
+            "err_id": "{{ result_get.json.issue.custom_fields[2].value }}",
+            "timestamp": "{{ result_get.json.issue.custom_fields[1].value }}",
+            "err_target": "{{ result_get.json.issue.custom_fields[3].value }}",
+            "err_code": "{{ result_get.json.issue.custom_fields[4].value }}",
+            "description": "{{ result_get.json.issue.description }}",
+            "ticket_no": "{{ ticket_no }})",
+            "redmine": "http://{{ ex_ip_address }}:3000/issues/{{ ticket_no }"
+          }
+      register: result_powera
+
+    - name: powerautomete debug
+      ansible.builtin.debug:
+        var: result_powera

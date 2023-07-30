@@ -1,16 +1,30 @@
 # Webhook Parameter: request, ticket_no 
-- name: Trouble Recover Close Rulebook
+- name: Action Auto Reboot Rulebook
   hosts: localhost
 
   sources:
     - ansible.eda.webhook:
         host: 0.0.0.0
-        port: 5003
+        port: 5004
 
   rules:
-    - name: Close Trouble
-      condition: event.payload.request == "close"
+    - name: Auto Reboot
+      condition: event.payload.request == "auto_reboot"
       actions:
+        - run_job_template:
+            name: Redmine Issue Update With Description
+            organization: Default
+            job_args: 
+              extra_vars: 
+                ticket_no: '"{{ event.payload.ticket_no }}"'
+                status_id: "2"
+                context: "Action"
+                action_memo: "自動再起動で対応(auto-reboot)"
+
+        - run_job_template:
+            name: Sample-apl Start
+            organization: Default
+
         - run_job_template:
             name: Redmine Issue Update
             organization: Default

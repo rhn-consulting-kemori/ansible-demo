@@ -1,4 +1,4 @@
----
+# Webhook Parameter: err_id, context, system_name, timestamp, err_target, err_code 
 - name: Error Recieve Rulebook
   hosts: localhost
 
@@ -8,36 +8,13 @@
         port: 5001
 
   rules:
-    - name: Error Stop
+    - name: Error Stop And Error Notification
       condition: event.payload.system_name is defined
-      action:
+      actions:
         - run_job_template:
             name: Sample-apl Stop
             organization: Default
 
-    - name: Auto Reboot
-      condition: event.payload.system_name == "system_auto"
-      actions:
-        - run_job_template:
-            name: Sample-apl Start
-            organization: Default
-
-        - run_job_template:
-            name: Auto Reboot
-            organization: Default
-            job_args: 
-              extra_vars: 
-                subject: '"[障害]{{ event.payload.err_id }}"'
-                description: '"{{ event.payload.context }}"'
-                system_name: '"{{ event.payload.system_name }}"'
-                timestamp: '"{{ event.payload.timestamp }}"'
-                err_id: '"{{ event.payload.err_id }}"'
-                err_target: '"{{ event.payload.err_target }}"'
-                err_code: '"{{ event.payload.err_code }}"' 
-
-    - name: Recomfirm Reboot
-      condition: event.payload.system_name != "system_auto"
-      action:
         - run_job_template:
             name: Teams Action Notification
             organization: Default

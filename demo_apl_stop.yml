@@ -1,3 +1,4 @@
+# Job-Template: Sample-apl Stop
 - name: Start demo apl
   hosts: demo_server
   tasks:

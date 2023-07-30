@@ -1,3 +1,5 @@
+# Job-Template: Demo Trigger Check
+# Env Parameter: eda_server_urlport 
 - name: Check Demo Trigger
   hosts: demo_server
   tasks:
@@ -32,7 +34,7 @@
       
     - name: API Post
       uri:
-        url: "{{ check_url }}"
+        url: "{{ eda_server_urlport }}"
         method: POST
         body_format: json
         body: "{{ item }}"

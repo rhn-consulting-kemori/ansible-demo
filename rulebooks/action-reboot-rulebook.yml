@@ -1,4 +1,4 @@
----
+# Webhook Parameter:request, ticket_no, action_memo 
 - name: Trouble Recover Reboot Rulebook
   hosts: localhost
 
@@ -12,10 +12,6 @@
       condition: event.payload.request == "reboot"
       actions:
         - run_job_template:
-            name: Sample-apl Start
-            organization: Default
-
-        - run_job_template:
             name: Redmine Issue Update With Description
             organization: Default
             job_args: 
@@ -25,7 +21,11 @@
                 context: "Action"
                 action_memo: '"{{ event.payload.action_memo }}"'
 
-         - run_job_template:
+        - run_job_template:
+            name: Sample-apl Start
+            organization: Default
+
+        - run_job_template:
             name: Teams Complete Notification
             organization: Default
             job_args: 
