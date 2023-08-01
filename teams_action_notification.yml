@@ -88,8 +88,8 @@
             "err_target": "{{ result_post.json.issue.custom_fields[3].value }}",
             "err_code": "{{ result_post.json.issue.custom_fields[4].value }}",
             "description": "{{ result_post.json.issue.description }}",
-            "ticket_no": "{{ result_post.json.issue.id }})",
-            "redmine": "http://{{ ex_ip_address }}:3000/issues/{{ result_post.json.issue.id }"
+            "ticket_no": "{{ result_post.json.issue.id }}",
+            "redmine": "http://{{ ex_ip_address }}:3000/issues/{{ result_post.json.issue.id }}"
           }
       register: result_powera
 
