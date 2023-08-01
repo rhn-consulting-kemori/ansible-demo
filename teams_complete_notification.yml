@@ -64,8 +64,8 @@
             "err_target": "{{ result_get.json.issue.custom_fields[3].value }}",
             "err_code": "{{ result_get.json.issue.custom_fields[4].value }}",
             "description": "{{ result_get.json.issue.description }}",
-            "ticket_no": "{{ ticket_no }})",
-            "redmine": "http://{{ ex_ip_address }}:3000/issues/{{ ticket_no }"
+            "ticket_no": "{{ ticket_no }}",
+            "redmine": "http://{{ ex_ip_address }}:3000/issues/{{ ticket_no }}"
           }
       register: result_powera
 
