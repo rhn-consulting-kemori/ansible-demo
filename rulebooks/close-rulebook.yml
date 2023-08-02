@@ -21,7 +21,7 @@
                 context: "Complete"
 
         - run_job_template:
-            name: Redmine Issue Update
+            name: Redmine Issue Update Close
             organization: Default
             job_args: 
               extra_vars: 

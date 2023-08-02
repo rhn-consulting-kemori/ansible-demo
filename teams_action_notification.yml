@@ -8,7 +8,7 @@
       vars:
         date1: '{{ lookup(''pipe'', ''date "+%Y-%m-%d %H:%M:%S"'') }}'
         date2: "{{ date1 | to_datetime('%Y-%m-%d %H:%M:%S') }}"
-        date3: '{{ lookup(''pipe'', ''date -d "{{ date2 }} 9 hour" "+%Y/%m/%d %H:%M:%S"'') }}'
+        date3: '{{ lookup(''pipe'', ''date -d "{{ date2 }} 9 hour" "+%Y-%m-%d %H:%M:%S"'') }}'
 
       ansible.builtin.uri:
         url: http://{{ ip_address }}:3000/issues.json

@@ -1,7 +1,7 @@
-# Job Template: Redmine Issue Update With Description
-# Env parameter: ip_address, api_key
-# Survey Parameter: ticket_no, status_id, context, action_memo 
-- name: redmine put issue2
+# Job-Template: Redmine Issue Update Close
+# Env Parameter: ip_address, api_key 
+# Survey Parameter: ticket_no, status_id, context 
+- name: redmine put issue
   hosts: demo_server
   tasks:
     - name: Get Issue
@@ -14,11 +14,17 @@
           X-Redmine-API-Key: "{{ api_key }}" 
       register: result_get
 
-    - name: Update Issue with Description
+    - name: Update Issue
       vars:
         date1: '{{ lookup(''pipe'', ''date "+%Y-%m-%d %H:%M:%S"'') }}'
         date2: "{{ date1 | to_datetime('%Y-%m-%d %H:%M:%S') }}"
         date3: '{{ lookup(''pipe'', ''date -d "{{ date2 }} 9 hour" "+%Y-%m-%d %H:%M:%S"'') }}'
+        date4: "{{ date3 | to_datetime('%Y-%m-%d %H:%M:%S') }}"
+
+        date_start_second: "{{ (result_get.json.issue.custom_fields[1].value | to_datetime('%Y-%m-%d %H:%M:%S')).timestamp() }}"
+        date_close_second: "{{ (date4 | to_datetime('%Y-%m-%d %H:%M:%S')).timestamp() }}"
+
+        action_time_min: "{{ ((date_close_second | int) - (date_start_second | int)) / (60) }}"
 
       ansible.builtin.uri:
         url: http://{{ ip_address }}:3000/issues/{{ ticket_no }}.json
@@ -33,14 +39,13 @@
           {
             "issue": {
               "status_id": "{{ status_id }}",
-              "description": "{{ result_get.json.issue.description }}\n{{ action_memo }}",
               "custom_fields":[
-                {"id":6,"value":"{{ result_get.json.issue.custom_fields[5].value }},{{ context }}:{{ date3 }}"}
+                {"id":6,"value":"{{ result_get.json.issue.custom_fields[5].value }},{{ context }}:{{ date3 }},---,total-time(min):{{ action_time_min }}"}
               ]
             }
           }
-      register: result
+      register: result_put
 
     - name: debug
       ansible.builtin.debug:
-        var: result
+        var: result_put
