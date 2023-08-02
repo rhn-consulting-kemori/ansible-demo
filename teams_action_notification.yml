@@ -80,7 +80,6 @@
           Content-Type: application/json
         body: |-
           {
-            "list_name": "障害対応判定リスト",
             "subject": "{{ result_post.json.issue.subject }}",
             "system_name": "{{ result_post.json.issue.custom_fields[0].value }}",
             "err_id": "{{ result_post.json.issue.custom_fields[2].value }}",

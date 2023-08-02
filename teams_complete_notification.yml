@@ -56,7 +56,6 @@
           Content-Type: application/json
         body: |-
           {
-            "list_name": "クローズ依頼リスト",
             "subject": "{{ result_get.json.issue.subject }}",
             "system_name": "{{ result_get.json.issue.custom_fields[0].value }}",
             "err_id": "{{ result_get.json.issue.custom_fields[2].value }}",
