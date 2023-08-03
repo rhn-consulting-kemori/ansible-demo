@@ -71,7 +71,7 @@
       ansible.builtin.debug:
         var: result_teams
 
-    - name: Powerautomates call judge-list-recieve
+    - name: Powerautomates call error-judge
       ansible.builtin.uri:
         url: "{{ powerautomate_webhook_url }}"
         method: POST
