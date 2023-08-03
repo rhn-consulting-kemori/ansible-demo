@@ -24,7 +24,12 @@
         date_start_second: "{{ (result_get.json.issue.custom_fields[1].value | to_datetime('%Y-%m-%d %H:%M:%S')).timestamp() }}"
         date_close_second: "{{ (date4 | to_datetime('%Y-%m-%d %H:%M:%S')).timestamp() }}"
 
-        action_time_min: "{{ ((date_close_second | int) - (date_start_second | int)) / (60) }}"
+        action_time_tsec: "{{ ((date_close_second | int) - (date_start_second | int)) }}"
+        action_time_hour: "{{ (action_time_tsec / (60 * 60) | int) }}"
+        action_time_tsec: "{{ (action_time_tsec - (action_time_hour * 60 * 60) | int) }}"
+        action_time_min: "{{ (action_time_tsec / 60 | int) }}"
+        action_time_sec: "{{ (action_time_tsec - (action_time_min * 60) | int) }}" 
+        # action_time_min: "{{ ((date_close_second | int) - (date_start_second | int)) / (60) }}"
 
       ansible.builtin.uri:
         url: http://{{ ip_address }}:3000/issues/{{ ticket_no }}.json
@@ -40,7 +45,7 @@
             "issue": {
               "status_id": "{{ status_id }}",
               "custom_fields":[
-                {"id":6,"value":"{{ result_get.json.issue.custom_fields[5].value }},{{ context }}:{{ date3 }},---,total-time(min):{{ action_time_min }}"}
+                {"id":6,"value":"{{ result_get.json.issue.custom_fields[5].value }},{{ context }}:{{ date3 }},---,total-time:{{ action_time_hour }}h{{ action_time_min }}m{{ action_time_sec }}s"}
               ]
             }
           }
