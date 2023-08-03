@@ -26,9 +26,9 @@
         action_time_tsec: "{{ ((date_close_second | int) - (date_start_second | int) | int) }}"
 
         action_time_hour: "{{ ((action_time_tsec | int) / 3600) | int }}"
-        action_time_tsec2: "{{ action_time_tsec - action_time_hour * 3600 | int}}"
-        action_time_min: "{{ action_time_tsec2 / 60 | int }}"
-        action_time_sec: "{{ action_time_tsec2 - action_time_min * 60 | int}}" 
+        action_time_tsec2: "{{ (action_time_tsec - action_time_hour * 3600) | int}}"
+        action_time_min: "{{ ((action_time_tsec2 | int) / 60) | int }}"
+        action_time_sec: "{{ ((action_time_tsec2 | int) - (action_time_min | int) * 60) | int}}" 
         # action_time_min: "{{ ((date_close_second | int) - (date_start_second | int)) / (60) }}"
 
       ansible.builtin.uri:
