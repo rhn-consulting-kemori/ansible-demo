@@ -19,7 +19,7 @@
                 ticket_no: '"{{ event.payload.ticket_no }}"'
                 status_id: "2"
                 context: "Action"
-                action_memo: "自動再起動で対応(auto-reboot)"
+                action_memo: '"{{ event.payload.action_memo }}"'
 
         - run_job_template:
             name: Sample-apl Start
