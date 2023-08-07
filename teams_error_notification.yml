@@ -1,6 +1,6 @@
 # Job-Template: Teams Error Notification
 # Env Parameter: powerautomate_webhook_url 
-# Survey Parameter: subject,  system_name, err_id, timestamp, err_target, err_code, description, redmine, judge-type, judge-note, judge-action
+# Survey Parameter: subject,  system_name, err_id, timestamp, err_target, err_code, description, redmine, judge_type, judge_note, judge_action
 - name: Teams Error Notification
   hosts: demo_server
   tasks:
@@ -21,9 +21,9 @@
             "err_code": "{{ err_code }}",
             "description": "{{ description }}",
             "redmine": "{{ redmine }}",
-            "judge-type": "{{ judge-type }}",
-            "judge-note": "{{ judge-note }}",
-            "judge-action": "{{ judge-action }}"
+            "judge_type": "{{ judge_type }}",
+            "judge_note": "{{ judge_note }}",
+            "judge_action": "{{ judge_action }}"
           }
       register: result_powera
 

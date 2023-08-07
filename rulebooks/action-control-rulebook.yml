@@ -1,4 +1,4 @@
-# Webhook Parameter: request, subject, system_name, err_id, timestamp, err_target, err_code, description, ticket_no, redmine, judge-type, judge-note, judge-action
+# Webhook Parameter: request, subject, system_name, err_id, timestamp, err_target, err_code, description, ticket_no, redmine, judge_type, judge_note, judge_action
 - name: Action Control Rulebook
   hosts: localhost
 
@@ -24,12 +24,12 @@
                 err_code: '"{{ event.payload.err_code }}"'
                 description: '"{{ event.payload.description }}"'
                 redmine: '"{{ event.payload.redmine }}"'
-                judge-type: '"{{ event.payload.judge-type }}"'
-                judge-note: '"{{ event.payload.judge-note }}"'
-                judge-action: '"{{ event.payload.judge-action }}"'
+                judge_type: '"{{ event.payload.judge_type }}"'
+                judge_note: '"{{ event.payload.judge_note }}"'
+                judge_action: '"{{ event.payload.judge_action }}"'
 
     - name: Auto Reboot
-      condition: event.payload.request == "action_control" and event.payload.judge-type == "自動再起動"
+      condition: event.payload.request == "action_control" and event.payload.judge_type == "自動再起動"
       actions:
         - run_job_template:
             name: Auto Reboot Kick
@@ -37,10 +37,10 @@
             job_args: 
               extra_vars: 
                 ticket_no: '"{{ event.payload.ticket_no }}"'
-                action_memo: '"{{ event.payload.judge-action }}:{{ event.payload.judge-note }}"'
+                action_memo: '"{{ event.payload.judge_action }}:{{ event.payload.judge_note }}"'
 
     - name: Approve Reboot
-      condition: event.payload.request == "action_control" and event.payload.judge-type == "承認付き再起動"
+      condition: event.payload.request == "action_control" and event.payload.judge_type == "承認付き再起動"
       actions:
         - run_job_template:
             name: Approve Reboot Kick
