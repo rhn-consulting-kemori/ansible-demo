@@ -35,7 +35,7 @@
               "status_id": "{{ status_id }}",
               "description": "{{ result_get.json.issue.description }}\n{{ action_memo }}",
               "custom_fields":[
-                {"id":6,"value":"{{ result_get.json.issue.custom_fields[5].value }},{{ context }}:{{ date3 }}"}
+                {"id":6,"value":"{{ result_get.json.issue.custom_fields[5].value }},{{ date3 }} {{ context }}"}
               ]
             }
           }

@@ -16,7 +16,7 @@
             organization: Default
 
         - run_job_template:
-            name: Teams Action Notification
+            name: Error Judge
             organization: Default
             job_args: 
               extra_vars: 

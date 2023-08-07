@@ -1,0 +1,58 @@
+# Webhook Parameter: request, subject, system_name, err_id, timestamp, err_target, err_code, description, ticket_no, redmine, judge-type, judge-note, judge-action
+- name: Action Control Rulebook
+  hosts: localhost
+
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5005
+
+  rules:
+    - name: Action Control
+      condition: event.payload.request == "action_control"
+      actions:
+        - run_job_template:
+            name: Teams Error Notification
+            organization: Default
+            job_args: 
+              extra_vars: 
+                subject: '"{{ event.payload.subject }}"'
+                system_name: '"{{ event.payload.system_name }}"'
+                err_id: '"{{ event.payload.err_id }}"'
+                timestamp: '"{{ event.payload.timestamp }}"'
+                err_target: '"{{ event.payload.err_target }}"'
+                err_code: '"{{ event.payload.err_code }}"'
+                description: '"{{ event.payload.description }}"'
+                redmine: '"{{ event.payload.redmine }}"'
+                judge-type: '"{{ event.payload.judge-type }}"'
+                judge-note: '"{{ event.payload.judge-note }}"'
+                judge-action: '"{{ event.payload.judge-action }}"'
+
+    - name: Auto Reboot
+      condition: event.payload.request == "action_control" and event.payload.judge-type == "自動再起動"
+      actions:
+        - run_job_template:
+            name: Auto Reboot Kick
+            organization: Default
+            job_args: 
+              extra_vars: 
+                ticket_no: '"{{ event.payload.ticket_no }}"'
+                action_memo: '"{{ event.payload.judge-action }}:{{ event.payload.judge-note }}"'
+
+    - name: Approve Reboot
+      condition: event.payload.request == "action_control" and event.payload.judge-type == "承認付き再起動"
+      actions:
+        - run_job_template:
+            name: Approve Reboot Kick
+            organization: Default
+            job_args: 
+              extra_vars: 
+                subject: '"{{ event.payload.subject }}"'
+                system_name: '"{{ event.payload.system_name }}"'
+                err_id: '"{{ event.payload.err_id }}"'
+                timestamp: '"{{ event.payload.timestamp }}"'
+                err_target: '"{{ event.payload.err_target }}"'
+                err_code: '"{{ event.payload.err_code }}"'
+                description: '"{{ event.payload.description }}"'
+                ticket_no: '"{{ event.payload.ticket_no }}"' 
+                redmine: '"{{ event.payload.redmine }}"'

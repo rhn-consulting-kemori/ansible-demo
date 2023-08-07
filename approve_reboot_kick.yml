@@ -1,0 +1,30 @@
+# Job-Template: Approve Reboot Kick
+# Env Parameter: powerautomate_webhook_url 
+# Survey Parameter: subject, system_name, err_id, timestamp, err_target, err_code, description, ticket_no, redmine
+- name: Approve Reboot Kick
+  hosts: demo_server
+  tasks:
+    - name: Powerautomates call reboot-approval
+      ansible.builtin.uri:
+        url: "{{ powerautomate_webhook_url }}"
+        method: POST
+        body_format: json
+        headers:
+          Content-Type: application/json
+        body: |-
+          {
+            "subject": "{{ subject }}",
+            "system_name": "{{ system_name }}",
+            "err_id": "{{ err_id }}",
+            "timestamp": "{{ timestamp }}",
+            "err_target": "{{ err_target }}",
+            "err_code": "{{ err_code }}",
+            "description": "{{ description }}",
+            "ticket_no": "{{ ticket_no }}",
+            "redmine": "{{ redmine }}"
+          }
+      register: result_powera
+
+    - name: powerautomete debug
+      ansible.builtin.debug:
+        var: result_powera

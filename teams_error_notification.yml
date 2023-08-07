@@ -1,0 +1,32 @@
+# Job-Template: Teams Error Notification
+# Env Parameter: powerautomate_webhook_url 
+# Survey Parameter: subject,  system_name, err_id, timestamp, err_target, err_code, description, redmine, judge-type, judge-note, judge-action
+- name: Teams Error Notification
+  hosts: demo_server
+  tasks:
+    - name: Powerautomates call error-notify
+      ansible.builtin.uri:
+        url: "{{ powerautomate_webhook_url }}"
+        method: POST
+        body_format: json
+        headers:
+          Content-Type: application/json
+        body: |-
+          {
+            "subject": "{{ subject }}",
+            "system_name": "{{ system_name }}",
+            "err_id": "{{ err_id }}",
+            "timestamp": "{{ timestamp }}",
+            "err_target": "{{ err_target }}",
+            "err_code": "{{ err_code }}",
+            "description": "{{ description }}",
+            "redmine": "{{ redmine }}",
+            "judge-type": "{{ judge-type }}",
+            "judge-note": "{{ judge-note }}",
+            "judge-action": "{{ judge-action }}"
+          }
+      register: result_powera
+
+    - name: powerautomete debug
+      ansible.builtin.debug:
+        var: result_powera
