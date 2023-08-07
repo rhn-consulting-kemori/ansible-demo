@@ -1,12 +1,12 @@
 # Job-Template: Auto Reboot Kick
-# Env Parameter: eda_server-url 
+# Env Parameter: eda_server_url 
 # Survey Parameter: ticket_no, action_memo
 - name: Auto Reboot Kick
   hosts: demo_server
   tasks:
     - name: Call EDA Rulebook
       ansible.builtin.uri:
-        url: "{{ eda_server-url }}"
+        url: "{{ eda_server_url }}"
         method: POST
         body_format: json
         headers:

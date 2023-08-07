@@ -18,7 +18,7 @@
               extra_vars: 
                 ticket_no: '"{{ event.payload.ticket_no }}"'
                 status_id: "3"
-                context: "Complete"
+                context: "対応完了"
 
         - run_job_template:
             name: Redmine Issue Update Close
@@ -27,7 +27,7 @@
               extra_vars: 
                 ticket_no: '"{{ event.payload.ticket_no }}"'
                 status_id: "5"
-                context: "Close"
+                context: "クローズ"
 
         - run_job_template:
             name: Teams Close Notification

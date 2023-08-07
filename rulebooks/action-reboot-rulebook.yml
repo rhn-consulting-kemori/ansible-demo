@@ -18,7 +18,7 @@
               extra_vars: 
                 ticket_no: '"{{ event.payload.ticket_no }}"'
                 status_id: "2"
-                context: "Action"
+                context: "対応実施"
                 action_memo: '"{{ event.payload.action_memo }}"'
 
         - run_job_template:
