@@ -1,4 +1,4 @@
-# Job-Template: Teams Action Notification
+# Job-Template: Error Judge
 # Env Parameter: ip_address, api_key, project_id, tracker_id, teams_webhook_url, ex_ip_address, powerautomate_webhook_url 
 # Survey Parameter: subject, description, system_name, timestamp, err_id, err_target, err_code 
 - name: Post Issue and Error Judge
