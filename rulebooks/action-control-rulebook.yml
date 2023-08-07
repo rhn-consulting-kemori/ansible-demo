@@ -8,8 +8,8 @@
         port: 5005
 
   rules:
-    - name: Action Control
-      condition: event.payload.request == "action_control"
+    - name: Auto Reboot
+      condition: event.payload.request == "action_control" and event.payload.judge_type == "自動再起動"
       actions:
         - run_job_template:
             name: Teams Error Notification
@@ -28,9 +28,6 @@
                 judge_note: '"{{ event.payload.judge_note }}"'
                 judge_action: '"{{ event.payload.judge_action }}"'
 
-    - name: Auto Reboot
-      condition: event.payload.request == "action_control" and event.payload.judge_type == "自動再起動"
-      actions:
         - run_job_template:
             name: Auto Reboot Kick
             organization: Default
@@ -42,6 +39,23 @@
     - name: Approve Reboot
       condition: event.payload.request == "action_control" and event.payload.judge_type == "承認付き再起動"
       actions:
+        - run_job_template:
+            name: Teams Error Notification
+            organization: Default
+            job_args: 
+              extra_vars: 
+                subject: '"{{ event.payload.subject }}"'
+                system_name: '"{{ event.payload.system_name }}"'
+                err_id: '"{{ event.payload.err_id }}"'
+                timestamp: '"{{ event.payload.timestamp }}"'
+                err_target: '"{{ event.payload.err_target }}"'
+                err_code: '"{{ event.payload.err_code }}"'
+                description: '"{{ event.payload.description }}"'
+                redmine: '"{{ event.payload.redmine }}"'
+                judge_type: '"{{ event.payload.judge_type }}"'
+                judge_note: '"{{ event.payload.judge_note }}"'
+                judge_action: '"{{ event.payload.judge_action }}"'
+
         - run_job_template:
             name: Approve Reboot Kick
             organization: Default
